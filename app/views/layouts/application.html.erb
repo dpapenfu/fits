@@ -28,12 +28,13 @@
     <li>
     <a href="/photos/:path_id">my fits</a>
     </li>
-
-    
     <li>
     <a href="/user_sign_out">sign out</a>
     </li>
     <%end%>
-    <%= yield %>
+    </ul>
+      <p> <%= notice %></p>
+      <p> <%= alert %></p>
+     <%= yield %>
   </body>
 </html>

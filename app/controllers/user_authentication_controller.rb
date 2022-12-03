@@ -3,11 +3,11 @@ class UserAuthenticationController < ApplicationController
   # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
   
   def welcome_page
-   # if @current_user.id != nil
+    if session.fetch(:user_id) == nil
       render({ :template => "user_authentication/welcome.html.erb" })
-     # else 
-    #  redirect_to({"/feed", { :notice => "Welcome back" })
-    #end
+     else 
+      redirect_to("/feed", { :notice => "welcome back" })
+    end
   end
   #redirect_to("/feed", { :notice => "Signed in successfully." })
   def sign_in_form
