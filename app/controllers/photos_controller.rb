@@ -7,15 +7,16 @@ class PhotosController < ApplicationController
     render({ :template => "photos/index.html.erb" })
   end
 
-  def show
-    the_id = params.fetch("path_id")
+  def myfits
+    the_id = session.fetch(:user_id)
+    user_photos = Photo.where(:owner_id=>the_id)
+    @my_photos = user_photos.order({ :created_at => :desc }) 
+    render({ :template => "photos/myfits.html.erb" })
+  end 
 
-    matching_photos = Photo.where({ :id => the_id })
 
-    @the_photo = matching_photos.at(0)
 
-    render({ :template => "photos/show.html.erb" })
-  end
+
 
   def feed 
    render({ :template => "photos/feed.html.erb"})
@@ -29,7 +30,7 @@ class PhotosController < ApplicationController
   def create
     the_photo = Photo.new
     the_photo.caption = params.fetch("query_caption")
-    the_photo.image = params.fetch("query_image")
+    the_photo.image = params.fetch("image")
     the_photo.owner_id = @current_user.id
     the_photo.location = params.fetch("query_location")
     the_photo.likes_count = 0
@@ -70,4 +71,15 @@ class PhotosController < ApplicationController
 
     redirect_to("/photos", { :notice => "Photo deleted successfully."} )
   end
+
+def show
+  the_id = params.fetch("path_id")
+
+  matching_photos = Photo.where({ :id => the_id })
+
+  @the_photo = matching_photos.at(0)
+
+  render({ :template => "photos/show.html.erb" })
+end
+
 end

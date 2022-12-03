@@ -74,6 +74,8 @@ Rails.application.routes.draw do
 
   get("/feed", { :controller => "photos", :action => "feed" })
 
+  get("/myfits", { :controller => "photos", :action => "myfits" })
+
   # UPDATE
   
   post("/modify_photo/:path_id", { :controller => "photos", :action => "update" })
