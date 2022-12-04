@@ -1,0 +1,41 @@
+<h2>the black book</h2>
+
+<%= @user_list.each do|the_thing|%>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          username
+        </th>
+
+        <th>
+          profile pic
+        </th>
+
+        <th>
+          to profile
+        </th>
+      </tr>
+      <% @user_list.each do |the_thing| %>
+      <tr>
+        <td>
+          <%= the_thing.username %>
+        </td>
+        <td>
+          <img src= "<%= the_thing.user.user_profile_pic%>" class="img-responsive">
+        </td>
+        <td>
+          <a href="/profile/<%= the_thing.user_id %>">
+            view profile
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

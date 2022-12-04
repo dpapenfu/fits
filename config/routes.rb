@@ -133,6 +133,15 @@ Rails.application.routes.draw do
   # SIGN OUT        
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
              
+  #Settings Page
+  get("/settings", {:controller=> "user_authentication", :action => "settings"})
+
+  #Search made some good ground on this, but I decided that I would be better served taking a similar approach to the generic photogram final did. 
+  get("/search", {:controller=> "user_authentication", :action => "search"})
+  get("/search_results", {:controller=> "user_authentication", :action => "search_results"})
+
+  #directory
+  get("/directory", {:controller=> "user_authentication", :action => "directory"})
   #------------------------------
 
 

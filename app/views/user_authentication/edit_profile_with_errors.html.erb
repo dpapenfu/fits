@@ -34,33 +34,13 @@
           
       </div>
                       
-      <div>
-        <label for="user_profile_pic_box">User profile pic</label>
-          
-        <input id="user_profile_pic_box" name="query_user_profile_pic" value="<%= @current_user.user_profile_pic %>">
-          
-      </div>
+  <div>
+    <label for="user_profile_pic_box">User profile pic</label>
+      
+    <input type="file" id="user_profile_pic_box" class="form-control" name="query_user_profile_pic">
+  </div>      
+ 
                       
-      <div>
-        <label for="sent_follow_requests_count_box">Sent follow requests count</label>
-          
-        <input id="sent_follow_requests_count_box" name="query_sent_follow_requests_count" value="<%= @current_user.sent_follow_requests_count %>">
-          
-      </div>
-                      
-      <div>
-        <label for="received_follow_requests_count_box">Received follow requests count</label>
-          
-        <input id="received_follow_requests_count_box" name="query_received_follow_requests_count" value="<%= @current_user.received_follow_requests_count %>">
-          
-      </div>
-                      
-      <div>
-        <label for="own_photos_count_box">Own photos count</label>
-          
-        <input id="own_photos_count_box" name="query_own_photos_count" value="<%= @current_user.own_photos_count %>">
-          
-      </div>
               
       <div>
         <label for="password_box">Password</label>

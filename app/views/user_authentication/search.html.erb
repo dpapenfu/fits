@@ -1,0 +1,6 @@
+<h1>find new people to follow</h1>
+<%= form_tag "/search_results", method: "GET" do %>
+    <%= text_field_tag :search_by_username, params[:search_by_username] %>
+
+   <%= submit_tag "Search" %>
+<% end %>

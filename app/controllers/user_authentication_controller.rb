@@ -49,6 +49,7 @@ class UserAuthenticationController < ApplicationController
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
+    @user.private = paras.fetch("query_private_confirmation")
     @user.username = params.fetch("query_username")
     @user.mobile = params.fetch("query_mobile")
     @user.user_profile_pic = params.fetch("query_user_profile_pic")
@@ -76,12 +77,11 @@ class UserAuthenticationController < ApplicationController
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
+    @user.private = params.fetch("query_private")
     @user.username = params.fetch("query_username")
     @user.mobile = params.fetch("query_mobile")
     @user.user_profile_pic = params.fetch("query_user_profile_pic")
-    @user.sent_follow_requests_count = params.fetch("query_sent_follow_requests_count")
-    @user.received_follow_requests_count = params.fetch("query_received_follow_requests_count")
-    @user.own_photos_count = params.fetch("query_own_photos_count")
+
     
     if @user.valid?
       @user.save
@@ -95,10 +95,27 @@ class UserAuthenticationController < ApplicationController
   def destroy
     @current_user.destroy
     reset_session
-    
     redirect_to("/", { :notice => "User account cancelled" })
   end
-  def settings
   
+  def settings
+  render({ :template => "user_authentication/settings.html.erb"})
   end
+
+  # def search
+  #   render({ :template => "user_authentication/search.html.erb"})
+  # end
+
+  def search_results
+   @searching = User.all
+    if params[:search_by_username] && params[:search_by_username] != ""
+    @search_resulting = @searching.where("username like ?", "%# {params[:search_by_username]}%")
+  end
+ 
+   render({ :template => "user_authentication/search.html.erb"})
+  end
+  def directory
+    @user_list = User.all
+    render({ :template => "user_authentication/directory.html.erb"})
+  end 
 end
