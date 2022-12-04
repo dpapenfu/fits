@@ -1,7 +1,5 @@
 <h2>the black book</h2>
 
-<%= @user_list.each do|the_thing|%>
-
 <hr>
 <div>
   <div>
@@ -25,10 +23,10 @@
           <%= the_thing.username %>
         </td>
         <td>
-          <img src= "<%= the_thing.user.user_profile_pic%>" class="img-responsive">
+          <img src= "<%= the_thing.user_profile_pic%>" class="img-responsive">
         </td>
         <td>
-          <a href="/profile/<%= the_thing.user_id %>">
+          <a href="/profile/<%= the_thing.id %>">
             view profile
           </a>
         </td>

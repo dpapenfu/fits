@@ -12,6 +12,8 @@ class PhotosController < ApplicationController
     if cu == profile_id
        redirect_to("/myfits")
     else
+      
+      @profile_own = User.where(:id=> profile_id).first  
       all_pics = Photo.all 
       profile_photos = all_pics.where(:owner_id => profile_id)
       @pics = profile_photos.order({ :created_at => :desc })
