@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   
   get("/photos/:path_id", { :controller => "photos", :action => "show" })
 
-  
+  get("/profile/:path_id", { :controller => "photos", :action => "profile" })
 
   get("/myfits", { :controller => "photos", :action => "myfits" })
 

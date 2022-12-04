@@ -61,9 +61,6 @@
         <th>
           Updated at
         </th>
-
-        <th>
-        </th>
       </tr>
 
       <% @list_of_photos.each do |a_photo| %>
@@ -102,11 +99,6 @@
         <td>
           <%= time_ago_in_words(a_photo.updated_at) %> ago
         </td>
-
-        <td>
-          <a href="/photos/<%= a_photo.id %>">
-            Show details
-          </a>
         </td>
       </tr>
       <% end %>

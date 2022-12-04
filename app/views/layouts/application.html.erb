@@ -18,12 +18,8 @@
   <body>
       <ul>
     <% if session.fetch(:user_id) == nil %>
-    <li>
-    <a href="/user_sign_up">Sign up</a>
-    </li>
-    <li>
-    <a href="/user_sign_in">Sign in</a>
-    </li>
+
+    
     <% else %>
     <img src= "<%= @current_user.user_profile_pic %>" class="img-responsive">
     <li>
@@ -41,8 +37,12 @@
       <p> <%= alert %></p>
      <%= yield %>
   </body>
+  <% if session.fetch(:user_id) == nil %>
+  
+  <%else%> 
   <a href="/add_photo">
     <i class="fa-thin fa-plus" alt="Add a new fit"> </i>
     Add a new fit
   </a>
+  <%end %>
 </html>

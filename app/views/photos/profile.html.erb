@@ -1,23 +1,13 @@
 <div>
   <div>
     <h1>
-      <%=@profile_owner.username%>
+      <%=@profiler.owner.username%>
     </h1>
   </div>
 </div>
 
 <hr>
 
-<div>
-  <div>
- <a href="/add_photo">
-    <i class="fa-thin fa-plus" alt="Add a new fit"> </i>
- 
-
-      <button>
-        add a new fit</button>
-    </a>
-    
   </div>
 </div>
 
@@ -27,7 +17,6 @@
     <table border="1">
       <tr>
 
-
         <th>
           Caption
         </th>
@@ -35,7 +24,6 @@
         <th>
           Image
         </th>
-
 
         <th>
           Location
@@ -58,11 +46,13 @@
         </th>
 
         <th>
+        Show details
         </th>
       </tr>
 
-      <% @my_photos.each do |a_photo| %>
+      <% @pics.each do |a_photo| %>
       <tr>
+
         <td>
           <%= a_photo.caption %>
         </td>
@@ -89,11 +79,9 @@
         <td>
           <%= time_ago_in_words(a_photo.updated_at) %> ago
         </td>
-
         <td>
-          <a href="/profile/<%= a_photo.owner_id %>">
-            Show details
-          </a>
+        <a href = "/photos/<%= a_photo.id%>">
+        Show details </a>
         </td>
       </tr>
       <% end %>

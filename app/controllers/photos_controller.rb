@@ -1,18 +1,31 @@
 class PhotosController < ApplicationController
   def index
-    matching_photos = Photo.all
+      matching_photos = Photo.all
 
-    @list_of_photos = matching_photos.order({ :created_at => :desc })
+      @list_of_photos = matching_photos.order({ :created_at => :desc })
 
-    render({ :template => "photos/index.html.erb" })
+      render({ :template => "photos/index.html.erb" })
   end
-
+  def profile 
+    cu = @current_user.id
+    profile_id = params.fetch(:path_id)
+    if cu == profile_id
+       redirect_to("/myfits")
+    else
+      all_pics = Photo.all 
+      profile_photos = all_pics.where(:owner_id => profile_id)
+      @pics = profile_photos.order({ :created_at => :desc })
+      @profiler = profile_photos.first
+      render({ :template => "photos/profile.html.erb" })
+    end 
+  
+  end 
   def myfits
     the_id = session.fetch(:user_id)
     user_photos = Photo.where(:owner_id=>the_id)
     
     @my_photos = user_photos.order({ :created_at => :desc })
-    @profile_owner = user_photos.first  
+    @profile_owner = @current_user
     render({ :template => "photos/myfits.html.erb" })
   end 
 
