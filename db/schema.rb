@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_02_162127) do
+ActiveRecord::Schema.define(version: 2022_12_03_234957) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2022_12_02_162127) do
   create_table "moots_requests", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "my_closets", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "clothing"
+    t.string "caption"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -25,8 +25,12 @@
     <a href="/user_sign_in">Sign in</a>
     </li>
     <% else %>
+    <img src= "<%= @current_user.user_profile_pic %>" class="img-responsive">
     <li>
     <a href="/myfits">my fits</a>
+    </li>
+    <li>
+    <a href="/my_closets">my closet</a>
     </li>
     <li>
     <a href="/user_sign_out">sign out</a>

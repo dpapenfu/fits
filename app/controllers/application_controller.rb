@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     the_id = session[:user_id]
     
     @current_user = User.where({ :id => the_id }).first
+
   end
   
   def force_user_sign_in

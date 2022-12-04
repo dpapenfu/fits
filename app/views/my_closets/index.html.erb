@@ -1,7 +1,8 @@
 <div>
   <div>
     <h1>
-      Dillon's fits
+      my closet
+
     </h1>
   </div>
 </div>
@@ -10,7 +11,7 @@
 
 <div>
   <div>
- <a href="/add_photo">
+ <a href="/add_clothing">
     <i class="fa-thin fa-plus" alt="Add a new fit"> </i>
  
 
@@ -31,27 +32,15 @@
         </th>
 
         <th>
+          User
+        </th>
+
+        <th>
+          Clothing
+        </th>
+
+        <th>
           Caption
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Location
-        </th>
-
-        <th>
-          Likes count
-        </th>
-
-        <th>
-          Comments count
         </th>
 
         <th>
@@ -66,45 +55,33 @@
         </th>
       </tr>
 
-      <% @my_photos.each do |a_photo| %>
+      <% @list_of_my_closets.each do |a_my_closet| %>
       <tr>
         <td>
-          <%= a_photo.id %>
+          <%= a_my_closet.id %>
         </td>
 
         <td>
-          <%= a_photo.caption %>
+          <%= a_my_closet.user_id %>
         </td>
 
         <td>
-          <img src= "<%= a_photo.image %>" class="img-responsive">
+          <img src = "<%= a_my_closet.clothing %>" class="img-responsive">
         </td>
 
         <td>
-          <%= a_photo.owner_id %>
+          <%= a_my_closet.caption %>
         </td>
 
         <td>
-          <%= a_photo.location %>
+          <%= time_ago_in_words(a_my_closet.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_my_closet.updated_at) %> ago
         </td>
 
         <td>
-          <%= a_photo.likes_count %>
-        </td>
-
-        <td>
-          <%= a_photo.comments_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_photo.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_photo.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/photos/<%= a_photo.id %>">
+          <a href="/my_closets/<%= a_my_closet.id %>">
             Show details
           </a>
         </td>

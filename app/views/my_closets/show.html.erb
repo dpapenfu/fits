@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <h1>
+     Outfit #<%= @the_my_closet.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/my_closets">
+          Go back
+        </a>
+      </div>
+
+
+
+    <dl>
+      <dd>
+        <img src = "<%= @the_my_closet.clothing %>" class="img-responsive">
+      </dd>
+
+      <dt>
+        Caption
+      </dt>
+      <dd>
+        <%= @the_my_closet.caption %>
+      </dd>
+
+      <dt>
+        Last worn
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_my_closet.created_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+      <div>
+        <a href="/delete_my_closet/<%= @the_my_closet.id %>">
+          Delete my closet
+        </a>
+      </div>
+    </div>

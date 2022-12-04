@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
 
+  # Routes for the My closet resource:   #MY CLOSET - the idea for my closet is for the user who is signed in to be able to keep a running log of what they have worn. RN, I am thinking about keeping this log separate from what other users can see, but I'm considering opening it up... 
+
+  # CREATE
+  get("/add_clothing", { :controller => "my_closets", :action => "new_clothing_form" })    
+  post("/insert_my_closet", { :controller => "my_closets", :action => "create" })
+       
+  # READ
+  get("/my_closets", { :controller => "my_closets", :action => "index" })
+  
+  get("/my_closets/:path_id", { :controller => "my_closets", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_my_closet/:path_id", { :controller => "my_closets", :action => "update" })
+  
+  # DELETE
+  get("/delete_my_closet/:path_id", { :controller => "my_closets", :action => "destroy" })
+
+  #------------------------------
+
   #Welcome page 
 
   get("/", { :controller => "user_authentication", :action=> "welcome_page"})
@@ -112,4 +132,6 @@ Rails.application.routes.draw do
              
   #------------------------------
 
+
+  
 end
