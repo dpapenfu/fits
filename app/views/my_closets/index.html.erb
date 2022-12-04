@@ -28,19 +28,11 @@
     <table border="1">
       <tr>
         <th>
-          ID
+          ft
         </th>
 
         <th>
-          User
-        </th>
-
-        <th>
-          Clothing
-        </th>
-
-        <th>
-          Caption
+          description
         </th>
 
         <th>
@@ -48,23 +40,12 @@
         </th>
 
         <th>
-          Updated at
         </th>
+              </tr>
 
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_my_closets.each do |a_my_closet| %>
+      <% @my_fits.each do |a_my_closet| %>
       <tr>
-        <td>
-          <%= a_my_closet.id %>
-        </td>
-
-        <td>
-          <%= a_my_closet.user_id %>
-        </td>
-
+       
         <td>
           <img src = "<%= a_my_closet.clothing %>" class="img-responsive">
         </td>
@@ -75,9 +56,6 @@
 
         <td>
           <%= time_ago_in_words(a_my_closet.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_my_closet.updated_at) %> ago
         </td>
 
         <td>

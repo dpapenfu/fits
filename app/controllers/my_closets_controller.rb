@@ -1,11 +1,21 @@
 class MyClosetsController < ApplicationController
+  def feed 
+    matching_my_closets = MyCloset.all
+    
+    @list_of_my_closets = matching_my_closets.order({ :created_at => :desc })
+    render({ :template => "my_closets/ootd.html.erb"})
+  end
+
   def index
+    the_user = session.fetch(:user_id)
     matching_my_closets = MyCloset.all
 
-    @list_of_my_closets = matching_my_closets.order({ :created_at => :desc })
+    @my_fits = matching_my_closets.where({ :user_id => the_user })
 
     render({ :template => "my_closets/index.html.erb" })
   end
+
+
 
   def show
     the_id = params.fetch("path_id")

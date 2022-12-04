@@ -10,17 +10,13 @@ class PhotosController < ApplicationController
   def myfits
     the_id = session.fetch(:user_id)
     user_photos = Photo.where(:owner_id=>the_id)
-    @my_photos = user_photos.order({ :created_at => :desc }) 
+    
+    @my_photos = user_photos.order({ :created_at => :desc })
+    @profile_owner = user_photos.first  
     render({ :template => "photos/myfits.html.erb" })
   end 
 
 
-
-
-
-  def feed 
-   render({ :template => "photos/feed.html.erb"})
-  end
 
   def new_photo_form
   

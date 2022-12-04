@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   post("/insert_my_closet", { :controller => "my_closets", :action => "create" })
        
   # READ
+  
+  get("/ootd", { :controller => "my_closets", :action => "feed" })
+
   get("/my_closets", { :controller => "my_closets", :action => "index" })
   
   get("/my_closets/:path_id", { :controller => "my_closets", :action => "show" })
-  
+ 
   # UPDATE
   
   post("/modify_my_closet/:path_id", { :controller => "my_closets", :action => "update" })
@@ -92,7 +95,7 @@ Rails.application.routes.draw do
   
   get("/photos/:path_id", { :controller => "photos", :action => "show" })
 
-  get("/feed", { :controller => "photos", :action => "feed" })
+  
 
   get("/myfits", { :controller => "photos", :action => "myfits" })
 

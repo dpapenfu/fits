@@ -7,6 +7,7 @@
 #  mobile                         :string
 #  own_photos_count               :integer
 #  password_digest                :string
+#  private                        :boolean
 #  received_follow_requests_count :integer
 #  sent_follow_requests_count     :integer
 #  user_profile_pic               :string

@@ -6,7 +6,7 @@ class UserAuthenticationController < ApplicationController
     if session.fetch(:user_id) == nil
       render({ :template => "user_authentication/welcome.html.erb" })
      else 
-      redirect_to("/feed", { :notice => "welcome back" })
+      redirect_to("/ootd", { :notice => "welcome back" })
     end
   end
   #redirect_to("/feed", { :notice => "Signed in successfully." })
@@ -27,7 +27,7 @@ class UserAuthenticationController < ApplicationController
       else
         session[:user_id] = user.id
       
-        redirect_to("/feed", { :notice => "Signed in successfully." })
+        redirect_to("/ootd", { :notice => "Signed in successfully." })
       end
     else
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
@@ -60,7 +60,7 @@ class UserAuthenticationController < ApplicationController
     if save_status == true
       session[:user_id] = @user.id
    
-      redirect_to("/feed", { :notice => "User account created successfully."})
+      redirect_to("/ootd", { :notice => "User account created successfully."})
       
     else
       redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
