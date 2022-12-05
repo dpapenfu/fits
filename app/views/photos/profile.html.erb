@@ -1,5 +1,6 @@
 <div>
   <div>
+    <img src= "<%= @profile_own.user_profile_pic %>" class="img-responsive">
     <h1>
       <%=@profile_own.username%>
     </h1>
@@ -10,7 +11,16 @@
 
   </div>
 </div>
+<%if @profile_own.private == true %>
 
+<h3>This user is private</h3>
+
+       <form action ="/insert_moots_request" method = "post">
+        <input id="query_recepient_id" type= "hidden" value= <%=@profile_own.id%> name="query_recipient_id">
+      <button>follow <%= @profile_own.username%></button>
+      </form> 
+    
+<% else %>
 <hr>
 <div>
   <div>
@@ -88,5 +98,5 @@
     </table>
   </div>
 </div>
-
+<%end%>
 <hr>

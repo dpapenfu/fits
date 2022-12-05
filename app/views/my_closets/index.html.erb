@@ -1,8 +1,8 @@
+<img src= "<%= @current_user.user_profile_pic %>" class="img-responsive">
 <div>
   <div>
-    <h1>
+       <h1>
       my closet
-
     </h1>
   </div>
 </div>
@@ -68,5 +68,38 @@
     </table>
   </div>
 </div>
+<h3>pending follow requests</h3>
+    <table border="1">
+      <tr>
+        <th>
+          username
+        </th>
 
+        <th>
+          description
+        </th>
+
+        <th colspan ="2">
+          
+              </tr>
+
+      <% @mutualr.each do |a_thing| %>
+      <tr>
+      <td>
+        <%= a_thing.sender.username %></a>
+      </td>
+
+        <td> <a href="/profile/<%= a_thing.sender.id %>">
+        
+          <img src = "<%= a_thing.sender.user_profile_pic %>" class="img-responsive">
+        </td>
+      <td>
+      accept
+      </td>
+      <td>
+      <a href="/delete_moots_request/<%=a_thing.id%>">delete</a>
+      </td>      
+      </tr>
+      <% end %>
+    </table>
 <hr>

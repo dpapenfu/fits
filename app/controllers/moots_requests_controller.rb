@@ -18,15 +18,16 @@ class MootsRequestsController < ApplicationController
   end
 
   def create
+    @the_id = session.fetch(:user_id)
     the_moots_request = MootsRequest.new
-    the_moots_request.sender_id = params.fetch("query_sender_id")
+    the_moots_request.sender_id = @the_id
     the_moots_request.recipient_id = params.fetch("query_recipient_id")
 
     if the_moots_request.valid?
       the_moots_request.save
-      redirect_to("/moots_requests", { :notice => "Moots request created successfully." })
+      redirect_to("/directory", { :notice => "Moots request created successfully." })
     else
-      redirect_to("/moots_requests", { :alert => the_moots_request.errors.full_messages.to_sentence })
+      redirect_to("/directory", { :alert => the_moots_request.errors.full_messages.to_sentence })
     end
   end
 
@@ -51,6 +52,6 @@ class MootsRequestsController < ApplicationController
 
     the_moots_request.destroy
 
-    redirect_to("/moots_requests", { :notice => "Moots request deleted successfully."} )
+    redirect_to("/my_closets", { :notice => "Moots request deleted successfully."} )
   end
 end

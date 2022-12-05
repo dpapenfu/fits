@@ -25,11 +25,18 @@
         <td>
           <img src= "<%= the_thing.user_profile_pic%>" class="img-responsive">
         </td>
+        <% if session.fetch(:user_id) == the_thing.id %>
+        <td>
+        <a href="/my_closets">
+          to profile</a>
+        </td>
+        <%else%>
         <td>
           <a href="/profile/<%= the_thing.id %>">
-            view profile
+          to profile
           </a>
         </td>
+      <%end%>
       </tr>
       <% end %>
     </table>

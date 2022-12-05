@@ -9,7 +9,7 @@ class MyClosetsController < ApplicationController
   def index
     the_user = session.fetch(:user_id)
     matching_my_closets = MyCloset.all
-
+    @mutualr = MootsRequest.where(:recipient_id=>the_user) 
     @my_fits = matching_my_closets.where({ :user_id => the_user })
 
     render({ :template => "my_closets/index.html.erb" })
