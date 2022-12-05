@@ -89,13 +89,17 @@
         <%= a_thing.sender.username %></a>
       </td>
 
-        <td> <a href="/profile/<%= a_thing.sender.id %>">
-        
-          <img src = "<%= a_thing.sender.user_profile_pic %>" class="img-responsive">
-        </td>
       <td>
-      accept
+          <img src = "<%= a_thing.sender.user_profile_pic %>" class="img-responsive">
       </td>
+      <td>
+      <form action ="/modify_moots_request/<%= a_thing.id%>" method = "post">
+      <input id="query_recepient_id" type= "hidden" value=<%=a_thing.recipient_id%> name="query_recipient_id">
+      <input id="query_sender_id" type= "hidden" value=<%=a_thing.sender_id%> name="query_sender_id">
+         <button>accept</button>
+        </form> 
+      </td>
+      
       <td>
       <a href="/delete_moots_request/<%=a_thing.id%>">delete</a>
       </td>      

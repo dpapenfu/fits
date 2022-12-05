@@ -37,6 +37,7 @@ class MootsRequestsController < ApplicationController
 
     the_moots_request.sender_id = params.fetch("query_sender_id")
     the_moots_request.recipient_id = params.fetch("query_recipient_id")
+    the_moots_request.status = 1
 
     if the_moots_request.valid?
       the_moots_request.save
