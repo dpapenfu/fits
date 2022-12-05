@@ -13,14 +13,23 @@ class PhotosController < ApplicationController
     @cu = params.fetch("path_id")
     @profile_own = User.where(:id=> profile_id).first
     @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first   
+    
    if @current_user.id == @cu
     redirect_to("mycloset/index.html.erb" )
    elsif @profile_own.private == nil 
+      if @status == true 
       all_pics = Photo.all 
       profile_photos = all_pics.where(:owner_id => profile_id)
       @pics = profile_photos.order({ :created_at => :desc })
       @profiler = profile_photos.first
-    render({ :template => "photos/profile.html.erb" })
+      render({ :template => "photos/profile.html.erb" })
+    else 
+      all_pics = Photo.all 
+      profile_photos = all_pics.where(:owner_id => profile_id)
+      @pics = profile_photos.order({ :created_at => :desc })
+      @profiler = profile_photos.first
+    render({ :template => "photos/profile_not_followed.html.erb" })
+    end
    elsif @status==nil 
     render({:template=>"photos/profile_private.html.erb"})
    else 
@@ -60,6 +69,7 @@ class PhotosController < ApplicationController
       the_photo.save
       redirect_to("/photos", { :notice => "Photo created successfully." })
     else
+      the_photo.save
       redirect_to("/photos", { :alert => the_photo.errors.full_messages.to_sentence })
     end
   end

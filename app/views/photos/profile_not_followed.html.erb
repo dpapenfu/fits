@@ -6,7 +6,10 @@
     </h1>
   </div>
 </div>
-
+       <form action ="/insert_moots_request" method = "post">
+        <input id="query_recepient_id" type= "hidden" value= <%=@profile_own.id%> name="query_recipient_id">
+      <button>follow <%= @profile_own.username%></button>
+      </form> 
 <hr>
 <div>
   <div>

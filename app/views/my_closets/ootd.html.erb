@@ -46,10 +46,12 @@
       </tr>
 
       <% @timely_fits.each do |a_fit| %>
-      <%if foll%>
+      <% if MootsRequest.where(:sender_id=>a_fit.user_id) == nil%>
+
+      <% else %>
       <tr>
         <td>
-          <%= a_fit.id %>
+          <%= a_fit.user_id %>
         </td>
 
         <td>
@@ -65,8 +67,10 @@
             <%=a_fit.user.username%>
           </a>
         </td>
+        <%end%>
       </tr>
       <% end %>
+      
     </table>
   </div>
 </div>
