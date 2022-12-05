@@ -11,17 +11,24 @@ class PhotosController < ApplicationController
     
     profile_id = params.fetch("path_id")
     @cu = params.fetch("path_id")
-    if @current_user.id == @cu
-      redirect_to("mycloset/index.html.erb" )
-    else
-      
-      @profile_own = User.where(:id=> profile_id).first   
+    @profile_own = User.where(:id=> profile_id).first
+    @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first   
+   if @current_user.id == @cu
+    redirect_to("mycloset/index.html.erb" )
+   elsif @profile_own.private == nil 
       all_pics = Photo.all 
       profile_photos = all_pics.where(:owner_id => profile_id)
       @pics = profile_photos.order({ :created_at => :desc })
       @profiler = profile_photos.first
-      render({ :template => "photos/profile.html.erb" })
-    end 
+    render({ :template => "photos/profile.html.erb" })
+   elsif @status==nil 
+    render({:template=>"photos/profile_private.html.erb"})
+   else 
+    all_pics = Photo.all 
+    profile_photos = all_pics.where(:owner_id => profile_id)
+    @pics = profile_photos.order({ :created_at => :desc })
+    @profiler = profile_photos.first
+   end 
   end
   
   def myfits
@@ -92,7 +99,30 @@ def show
 
   @the_photo = matching_photos.at(0)
 
+  @profile_id = @the_photo.owner_id
+
+  
+  @profile_own = User.where(:id=> @profile_id).first
+  @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first   
+ if @current_user.id == @profile_id
   render({ :template => "photos/show.html.erb" })
+ elsif @profile_own.private == nil 
+    all_pics = Photo.all 
+    profile_photos = all_pics.where(:owner_id => @profile_id)
+    @pics = profile_photos.order({ :created_at => :desc })
+    @profiler = profile_photos.first
+  render({ :template => "photos/show.html.erb" })
+ elsif @status==nil 
+  render({:template =>"photos/show_private.html.erb"})
+ else 
+  all_pics = Photo.all 
+  profile_photos = all_pics.where(:owner_id => @profile_id)
+  @pics = profile_photos.order({ :created_at => :desc })
+  @profiler = profile_photos.first
+  render({ :template => "photos/show.html.erb" })
+ end 
+
+  
 end
 
 end

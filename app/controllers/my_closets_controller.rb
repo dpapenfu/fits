@@ -1,8 +1,11 @@
 class MyClosetsController < ApplicationController
   def feed 
-    matching_my_closets = MyCloset.all
     
+    matching_my_closets = MyCloset.all
     @list_of_my_closets = matching_my_closets.order({ :created_at => :desc })
+
+    @timely_fits = @list_of_my_closets.where("created_at >?", 1.days.ago)
+
     render({ :template => "my_closets/ootd.html.erb"})
   end
 
@@ -69,4 +72,12 @@ class MyClosetsController < ApplicationController
 
     redirect_to("/my_closets", { :notice => "My closet deleted successfully."} )
   end
+
+  def blackbook
+    followers = MootsRequest.where(:recipient_id => @current_user.id)
+    @follower_list = followers.where(:status =>true) 
+    followed = MootsRequest.where(:sender_id => @current_user.id)
+    @followed_list = followed.where(:status =>true)
+   render( :template=>"/my_closets/blackbook.html.erb")
+  end 
 end

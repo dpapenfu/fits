@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get("/my_closets", { :controller => "my_closets", :action => "index" })
   
   get("/my_closets/:path_id", { :controller => "my_closets", :action => "show" })
+
+  get("/blackbook", { :controller => "my_closets", :action => "blackbook" })
  
   # UPDATE
   
