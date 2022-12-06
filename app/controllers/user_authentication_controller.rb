@@ -43,13 +43,12 @@ class UserAuthenticationController < ApplicationController
   def sign_up_form
     render({ :template => "user_authentication/sign_up.html.erb" })
   end
-
+  #made the decision to default new users to a public account. The user can make their account private if they chose by visiting the setting page and edit account. 
   def create
     @user = User.new
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
-    @user.private = paras.fetch("query_private_confirmation")
     @user.username = params.fetch("query_username")
     @user.mobile = params.fetch("query_mobile")
     @user.user_profile_pic = params.fetch("query_user_profile_pic")

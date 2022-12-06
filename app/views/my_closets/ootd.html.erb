@@ -27,10 +27,6 @@
     <table border="1">
       <tr>
         <th>
-          ID
-        </th>
-
-        <th>
           Caption
         </th>
 
@@ -41,8 +37,7 @@
         <th>
           Owner
         </th>
-        <th>
-        </th>
+       
       </tr>
 
       <% @timely_fits.each do |a_fit| %>
@@ -50,10 +45,7 @@
 
       <% else %>
       <tr>
-        <td>
-          <%= a_fit.user_id %>
-        </td>
-
+  
         <td>
           <%= a_fit.caption %>
         </td>
@@ -62,11 +54,19 @@
           <a href="/my_closets/<%= a_fit.id %>">
           <img src= "<%= a_fit.user.user_profile_pic%>" class="img-responsive">
         </td>
+         <% if session.fetch(:user_id) == a_fit.user_id %>
+        <td>
+        <a href="/myfits">
+          <%=a_fit.user.username%></a>
+        </td>
+        <%else%>
         <td>
           <a href="/profile/<%= a_fit.user_id %>">
-            <%=a_fit.user.username%>
+          <%=a_fit.user.username%>
           </a>
         </td>
+      <%end%>
+      
         <%end%>
       </tr>
       <% end %>
