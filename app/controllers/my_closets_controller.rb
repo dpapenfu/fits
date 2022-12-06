@@ -5,8 +5,8 @@ class MyClosetsController < ApplicationController
     @list_of_my_closets = matching_my_closets.order({ :created_at => :desc })
 
     @timely_fits = @list_of_my_closets.where("created_at <?", 1.days.ago)
-    followed = MootsRequest.where(:sender_id => @current_user.id)
-    @followed_list = followed.where(:status =>true)
+    @followed = MootsRequest.where(:sender_id => @current_user.id).where(:status=>true)
+    
 
     render({ :template => "my_closets/ootd.html.erb"})
   end

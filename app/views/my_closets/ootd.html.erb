@@ -1,58 +1,37 @@
 <div>
   <div>
-    <h1>
-      Outfits of the day
-    </h1>
+
   </div>
 </div>
-
-<hr>
-
+<h3>
 <div>
   <div>
- <a href="/add_photo">
-    <i class="fa-thin fa-plus" alt="Add a new fit"> </i>
- 
-
-      <button>
-        add a new fit</button>
+ <a href="/add_clothing">
+<button type="button" class=".btn-outline-*">fit check?</button>
+    
     </a>
-    </form>
+    
   </div>
-</div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          Caption
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Owner
-        </th>
-       
-      </tr>
-
+</div></h3>
+      <div clss = "banner">
       <% @timely_fits.each do |a_fit| %>
-      <% if MootsRequest.where(:sender_id=>a_fit.user_id) == nil%>
-
+      
+      <% if MootsRequest.where(:sender_id => @current_user.id).where(:recipient_id=>a_fit.user_id).where(:status=>true) == nil%>
+       
       <% else %>
+
+      <table border="1">
+
       <tr>
+      
   
-        <td>
+        <td class = "table_sizer" >
           <%= a_fit.caption %>
         </td>
 
         <td>
           <a href="/my_closets/<%= a_fit.id %>">
-          <img src= "<%= a_fit.user.user_profile_pic%>" class="img-responsive">
+          <img src= "<%= a_fit.user.user_profile_pic%>" class = "pfp" >
         </td>
          <% if session.fetch(:user_id) == a_fit.user_id %>
         <td>
@@ -60,19 +39,17 @@
           <%=a_fit.user.username%></a>
         </td>
         <%else%>
-        <td>
+        <td class= "table_sizer">
           <a href="/profile/<%= a_fit.user_id %>">
           <%=a_fit.user.username%>
           </a>
         </td>
-      <%end%>
+        <%end%>
       
         <%end%>
-      </tr>
-      <% end %>
+        </tr>
+        <% end %>
       
     </table>
-  </div>
 </div>
-
 <hr>
