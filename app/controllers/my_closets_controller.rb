@@ -2,7 +2,7 @@ class MyClosetsController < ApplicationController
   def feed 
     
     matching_my_closets = MyCloset.all
-    @list_of_my_closets = matching_my_closets.order({ :created_at => :desc })
+    @list_of_my_closets = matching_my_closets.order({ :created_at => :asc })
 
     @timely_fits = @list_of_my_closets.where("created_at <?", 1.days.ago)
     @followed = MootsRequest.where(:sender_id => @current_user.id).where(:status=>true)
@@ -13,7 +13,8 @@ class MyClosetsController < ApplicationController
 
   def index
     the_user = session.fetch(:user_id)
-    matching_my_closets = MyCloset.all
+    all_closets = MyCloset.all
+    matching_my_closets = all_closets.order({ :created_at => :desc})
     filtered = MootsRequest.where(:status=>nil)
     @mutualr = filtered.where(:recipient_id=>the_user) 
     @my_fits = matching_my_closets.where({ :user_id => the_user })
@@ -30,15 +31,31 @@ class MyClosetsController < ApplicationController
 
     @the_my_closet = matching_my_closets.at(0)
 
-    render({ :template => "my_closets/show.html.erb" })
+    @profile_id = @the_my_closet.user_id
+
+    @viewer_id = @current_user.id
+    @profile_own = User.where(:id=> @profile_id).first
+
+    @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first
+    @liked = FitCheck.where(:my_closet_id=>@the_my_closet.id).where(:user_id=>@current_user.id).first
+    
+    if @current_user.id == @profile_id
+      render({ :template => "my_closets/show.html.erb" })
+    elsif @profile_own.private == nil 
+    
+    elsif @status==nil 
+      render({:template =>"my_closets/show_private.html.erb"})
+    else 
+      render({ :template => "my_closets/show.html.erb" })
+    end 
   end
 
   def new_clothing_form
     render("my_closets/new_clothing_form.html.erb")  
   end 
   def create
-    require "twilio-ruby"
-    AC6cb2c32f288fb66ab198f5273cfbb99c
+    # require "twilio-ruby"
+    # AC6cb2c32f288fb66ab198f5273cfbb99c
     the_my_closet = MyCloset.new
     the_my_closet.user_id = session.fetch(:user_id)
     the_my_closet.clothing = params.fetch("clothing")
@@ -46,6 +63,27 @@ class MyClosetsController < ApplicationController
 
     if the_my_closet.valid?
       the_my_closet.save
+
+      require "twilio-ruby"
+      # Get your credentials from your Twilio dashboard, or from Canvas if you're using mine
+      account_sid = ENV['TWILIO_ACCOUNT_SID']
+      auth_token = ENV['TWILIO_AUTH_TOKEN']
+      @twilio_sending_number = "+13854584096"
+      @to_number = "+18015544258"
+
+      # Create an instance of the Twilio Client and authenticate with your API key
+      twilio_client = Twilio::REST::Client.new(account_sid, auth_token)
+
+      # Craft your SMS as a Hash literal with three keys
+      sms_info = {
+        :from => @twilio_sending_number,
+        :to => @to_number,
+        :body => "someone you follow just posted an ootd" 
+      }
+
+      # Send your SMS!
+        twilio_client.api.account.messages.create(sms_info)
+        
       redirect_to("/my_closets", { :notice => "My closet created successfully." })
     else
       redirect_to("/my_closets", { :alert => the_my_closet.errors.full_messages.to_sentence })
@@ -60,13 +98,9 @@ class MyClosetsController < ApplicationController
     the_my_closet.clothing = params.fetch("query_clothing")
     the_my_closet.caption = params.fetch("query_caption")
 
-    twilio_sid = AC28922e0822d827ee29834fe1dc6f681e
-    twilio_token = "TWILIO_AUTH_TOKEN"
-    twilio_sending_number = 13126636198
-
     if the_my_closet.valid?
       the_my_closet.save
-
+ 
       redirect_to("/my_closets/#{the_my_closet.id}", { :notice => "My closet updated successfully."} )
     else
       redirect_to("/my_closets/#{the_my_closet.id}", { :alert => the_my_closet.errors.full_messages.to_sentence })
@@ -79,7 +113,7 @@ class MyClosetsController < ApplicationController
 
     the_my_closet.destroy
 
-    redirect_to("/my_closets", { :notice => "My closet deleted successfully."} )
+    redirect_to("/my_closets", { :notice => "fit deleted successfully."} )
   end
 
   def blackbook

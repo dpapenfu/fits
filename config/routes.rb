@@ -1,5 +1,24 @@
 Rails.application.routes.draw do
 
+  # Routes for the Fit check resource:
+
+  # CREATE
+  post("/insert_fit_check", { :controller => "fit_checks", :action => "create" })
+          
+  # READ
+  get("/fit_checks", { :controller => "fit_checks", :action => "index" })
+  
+  get("/fit_checks/:path_id", { :controller => "fit_checks", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_fit_check/:path_id", { :controller => "fit_checks", :action => "update" })
+  
+  # DELETE
+  get("/delete_fit_check", { :controller => "fit_checks", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the My closet resource:   #MY CLOSET - the idea for my closet is for the user who is signed in to be able to keep a running log of what they have worn. RN, I am thinking about keeping this log separate from what other users can see, but I'm considering opening it up... 
 
   # CREATE

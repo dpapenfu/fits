@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_05_001223) do
+ActiveRecord::Schema.define(version: 2022_12_07_164859) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.integer "commenter_id"
     t.integer "photo_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fit_checks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "my_closet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

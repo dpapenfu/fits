@@ -4,26 +4,11 @@
   <div>
     <h3>Followers</h3>
     <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
 
-        <th>
-         sender_id
-        </th>
-
-        <th>
-          follower
-        </th>
-
-      </tr>
 
       <% @follower_list.each do |a_fit| %>
       <tr>
-        <td>
-          <%= a_fit.id %>
-        </td>
+
         <td>
         <a href="/profile/<%= a_fit.sender.id %>">
         <%= a_fit.sender.username%> 
@@ -43,32 +28,17 @@
 <hr><div>
     <h3>Following</h3>
     <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
 
-        <th>
-         sender_id
-        </th>
-
-        <th>
-          follower
-        </th>
-
-      </tr>
 
       <% @followed_list.each do |b_fit| %>
       <tr>
-        <td>
-          <%= b_fit.id %>
-        </td>
+
         <td>
         <a href="/profile/<%= b_fit.recipient.id %>">
         <%= b_fit.recipient.username%>
         </td>
         <td>
-         <img src= "<%= b_fit.recipient.user_profile_pic%>" class="img-responsive">
+         <img src= "<%= b_fit.recipient.user_profile_pic%>" class="pfp_other">
         </td>
                <td>
          <a href="/unfollow/<%= b_fit.id %>">

@@ -21,7 +21,7 @@ class LikesController < ApplicationController
     the_like = Like.new
     the_like.user_id = params.fetch("query_user_id")
     the_like.photo_id = params.fetch("query_photo_id")
-
+    
     if the_like.valid?
       the_like.save
       redirect_to("/photos/#{the_like.photo_id}")

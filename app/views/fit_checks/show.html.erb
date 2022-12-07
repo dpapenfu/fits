@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Fit check #<%= @the_fit_check.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/fit_checks">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_fit_check/<%= @the_fit_check.id %>">
+          Delete fit check
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_fit_check.user_id %>
+      </dd>
+
+      <dt>
+        My closet
+      </dt>
+      <dd>
+        <%= @the_fit_check.my_closet_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_fit_check.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_fit_check.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit fit check
+    </h2>
+
+    <form action="/modify_fit_check/<%= @the_fit_check.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_fit_check.user_id %>">
+      </div>
+
+      <div>
+        <label for="my_closet_id_box">
+          My closet
+        </label>
+
+        <input type="text" id="my_closet_id_box" name="query_my_closet_id" value="<%= @the_fit_check.my_closet_id %>">
+      </div>
+
+      <button>
+        Update fit check
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
