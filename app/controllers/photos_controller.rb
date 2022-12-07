@@ -118,7 +118,9 @@ def show
 
   
   @profile_own = User.where(:id=> @profile_id).first
-  @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first   
+  @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first
+  @liked = Like.where(:user_id=>@current_user.id)
+  
  if @current_user.id == @profile_id
   render({ :template => "photos/show.html.erb" })
  elsif @profile_own.private == nil 

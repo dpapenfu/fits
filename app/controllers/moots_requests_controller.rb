@@ -29,10 +29,10 @@ class MootsRequestsController < ApplicationController
       if recip_private == nil 
           the_moots_request.status = 1 
           the_moots_request.save
-          redirect_to("/directory", { :notice => "followed" })
+          redirect_to("/my_closets", { :notice => "followed" })
       else 
         the_moots_request.save
-        redirect_to("/directory", { :notice => "Moots request created successfully." })
+        redirect_to("/blackbook", { :notice => "Moots request created successfully." })
       end 
     else
       redirect_to("/directory", { :alert => the_moots_request.errors.full_messages.to_sentence })
@@ -49,9 +49,9 @@ class MootsRequestsController < ApplicationController
 
     if the_moots_request.valid?
       the_moots_request.save
-      redirect_to("/moots_requests/#{the_moots_request.id}", { :notice => "Moots request updated successfully."} )
+      redirect_to("/my_closets", { :notice => "updated"} )
     else
-      redirect_to("/moots_requests/#{the_moots_request.id}", { :alert => the_moots_request.errors.full_messages.to_sentence })
+      redirect_to("/my_closets", { :alert => the_moots_request.errors.full_messages.to_sentence })
     end
   end
 
@@ -61,6 +61,13 @@ class MootsRequestsController < ApplicationController
 
     the_moots_request.destroy
 
-    redirect_to("/my_closets", { :notice => "Moots request deleted successfully."} )
+    redirect_to("/blackbook", { :notice => "follower removed"} )
+  end
+
+  def unfollow
+    an_id = params.fetch("path_id")
+    the_moots_request = MootsRequest.where({ :id => an_id }).at(0)
+    the_moots_request.destroy
+    redirect_to("/blackbook", { :notice => "unfollowed"} )
   end
 end

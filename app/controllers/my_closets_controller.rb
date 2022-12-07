@@ -6,7 +6,7 @@ class MyClosetsController < ApplicationController
 
     @timely_fits = @list_of_my_closets.where("created_at <?", 1.days.ago)
     @followed = MootsRequest.where(:sender_id => @current_user.id).where(:status=>true)
-    
+    @viewer_id = @current_user.id
 
     render({ :template => "my_closets/ootd.html.erb"})
   end
@@ -37,6 +37,8 @@ class MyClosetsController < ApplicationController
     render("my_closets/new_clothing_form.html.erb")  
   end 
   def create
+    require "twilio-ruby"
+    AC6cb2c32f288fb66ab198f5273cfbb99c
     the_my_closet = MyCloset.new
     the_my_closet.user_id = session.fetch(:user_id)
     the_my_closet.clothing = params.fetch("clothing")
@@ -58,8 +60,13 @@ class MyClosetsController < ApplicationController
     the_my_closet.clothing = params.fetch("query_clothing")
     the_my_closet.caption = params.fetch("query_caption")
 
+    twilio_sid = AC28922e0822d827ee29834fe1dc6f681e
+    twilio_token = "TWILIO_AUTH_TOKEN"
+    twilio_sending_number = 13126636198
+
     if the_my_closet.valid?
       the_my_closet.save
+
       redirect_to("/my_closets/#{the_my_closet.id}", { :notice => "My closet updated successfully."} )
     else
       redirect_to("/my_closets/#{the_my_closet.id}", { :alert => the_my_closet.errors.full_messages.to_sentence })

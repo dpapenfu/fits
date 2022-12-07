@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_moots_request/:path_id", { :controller => "moots_requests", :action => "destroy" })
+  get("/unfollow/:path_id", { :controller => "moots_requests", :action => "unfollow" })
 
   #------------------------------
 

@@ -152,6 +152,10 @@ GEM
       railties (>= 5.0.0)
     faker (2.20.0)
       i18n (>= 1.8.11, < 2)
+    faraday (2.7.1)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -181,6 +185,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.5.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -354,6 +359,10 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    twilio-ruby (5.73.4)
+      faraday (>= 0.9, < 3.0)
+      jwt (>= 1.5, <= 2.5)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     tzinfo-data (1.2022.1)
@@ -418,6 +427,7 @@ DEPENDENCIES
   sprockets (< 4)
   sqlite3 (~> 1.4.1)
   table_print
+  twilio-ruby
   web-console (>= 3.3.0)
   web_git!
   webmock

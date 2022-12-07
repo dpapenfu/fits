@@ -16,19 +16,19 @@
       <div clss = "banner">
       <% @timely_fits.each do |a_fit| %>
       
-      <% if MootsRequest.where(:sender_id => @current_user.id).where(:recipient_id=>a_fit.user_id).where(:status=>true) == nil%>
-       
-      <% else %>
+      
 
       <table border="1">
-
+          
       <tr>
-      
-  
+
+      <% if MootsRequest.where(:sender_id => @current_user.id).where(:recipient_id=>a_fit.user_id).where(:status=>nil) == nil%>
+       
+          <% else %>
         <td class = "table_sizer" >
           <%= a_fit.caption %>
         </td>
-
+        <%end%>
         <td>
           <a href="/my_closets/<%= a_fit.id %>">
           <img src= "<%= a_fit.user.user_profile_pic%>" class = "pfp" >
@@ -46,7 +46,7 @@
         </td>
         <%end%>
       
-        <%end%>
+        
         </tr>
         <% end %>
       

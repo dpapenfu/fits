@@ -26,12 +26,15 @@
         </td>
         <td>
         <a href="/profile/<%= a_fit.sender.id %>">
-        <%= a_fit.sender.username%>
+        <%= a_fit.sender.username%> 
         </td>
         <td>
          <img src= "<%= a_fit.sender.user_profile_pic%>" class="pfp_other">
         </td>
-       
+        <td>
+         <a href="/delete_moots_request/<%= a_fit.id%>">
+        remove follower
+        </td>
        </tr>
       <% end %>
     </table>
@@ -67,7 +70,10 @@
         <td>
          <img src= "<%= b_fit.recipient.user_profile_pic%>" class="img-responsive">
         </td>
-       
+               <td>
+         <a href="/unfollow/<%= b_fit.id %>">
+        unfollow
+        </td>
        </tr>
       <% end %>
     </table>
