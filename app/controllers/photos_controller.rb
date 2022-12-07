@@ -116,10 +116,11 @@ def show
 
   @profile_id = @the_photo.owner_id
 
+  @viewer_id = @current_user.id
   
   @profile_own = User.where(:id=> @profile_id).first
   @status = MootsRequest.where(:sender_id=>@current_user.id).where(:recipient_id=>@profile_own.id).first
-  @liked = Like.where(:user_id=>@current_user.id)
+  @liked = Like.where(:photo_id=>@the_photo.id).where(:user_id=>@current_user.id).first
   
  if @current_user.id == @profile_id
   render({ :template => "photos/show.html.erb" })

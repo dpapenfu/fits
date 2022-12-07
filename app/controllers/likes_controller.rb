@@ -24,9 +24,9 @@ class LikesController < ApplicationController
 
     if the_like.valid?
       the_like.save
-      redirect_to("/likes")
+      redirect_to("/photos/#{the_like.photo_id}")
     else
-      redirect_to("/likes", { :alert => the_like.errors.full_messages.to_sentence })
+      redirect_to("/photos/#{the_like.photo_id}", { :alert => the_like.errors.full_messages.to_sentence })
     end
   end
 
@@ -46,11 +46,15 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch("path_id")
+    
+    liker = params.fetch("query_user_id")
+    liked_photo = params.fetch("query_photo_id")
+    liked_photo_array = Like.where(:photo_id=>liked_photo).where(:user_id=>liker).first
+    the_id = liked_photo_array.id
     the_like = Like.where({ :id => the_id }).at(0)
 
     the_like.destroy
 
-    redirect_to("/likes", { :notice => "Like deleted successfully."} )
+    redirect_to("/photos/#{liked_photo}", { :notice => "unliked"} )
   end
 end
