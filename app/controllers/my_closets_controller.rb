@@ -60,6 +60,10 @@ class MyClosetsController < ApplicationController
     the_my_closet.user_id = session.fetch(:user_id)
     the_my_closet.clothing = params.fetch("clothing")
     the_my_closet.caption = params.fetch("query_caption")
+    moots = MootsRequest.where(:recipient_id=>the_my_closet.user_id).where(:status=>true).first
+    mootsie = moots.sender_id
+    muts = User.where(:id=>mootsie).first
+    @moots_nr = muts.fetch(:mobile)
 
     if the_my_closet.valid?
       the_my_closet.save
@@ -69,7 +73,7 @@ class MyClosetsController < ApplicationController
       account_sid = ENV['TWILIO_ACCOUNT_SID']
       auth_token = ENV['TWILIO_AUTH_TOKEN']
       @twilio_sending_number = "+13854584096"
-      @to_number = "+18015544258"
+      @to_number = @moots_nr
 
       # Create an instance of the Twilio Client and authenticate with your API key
       twilio_client = Twilio::REST::Client.new(account_sid, auth_token)
