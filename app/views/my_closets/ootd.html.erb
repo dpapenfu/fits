@@ -23,7 +23,7 @@
       
       <tr>
 
-      <% if MootsRequest.where(:sender_id => @current_user.id).where(:recipient_id=>a_fit.user_id).where(:status=>true) != nil%>    
+      <% if MootsRequest.where(:sender_id => @current_user.id).where(:recipient_id=>a_fit.user_id).where(:status=>true).first != nil%>    
        
         
         <td class = "table_sizer" >

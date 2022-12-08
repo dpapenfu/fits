@@ -16,7 +16,7 @@ gem 'faker'
 gem 'carrierwave'
 gem 'cloudinary'
 gem "twilio-ruby"
-
+gem 'ransack'
 
 group :development do
   gem 'htmlbeautifier'

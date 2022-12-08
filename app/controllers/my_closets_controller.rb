@@ -4,8 +4,9 @@ class MyClosetsController < ApplicationController
     matching_my_closets = MyCloset.all
     @list_of_my_closets = matching_my_closets.order({ :created_at => :asc })
 
-    @timely_fits = @list_of_my_closets.where("created_at <?", 1.days.ago)
+    @timely_fits = @list_of_my_closets.where("created_at >?", 1.days.ago)
     @followed = MootsRequest.where(:sender_id => @current_user.id).where(:status=>true)
+    #array_from_people_i_follow = MyCloset.where(:user_id=>@followed.recipient_id)
     @viewer_id = @current_user.id
 
     render({ :template => "my_closets/ootd.html.erb"})
