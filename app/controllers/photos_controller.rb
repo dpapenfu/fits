@@ -6,6 +6,15 @@ class PhotosController < ApplicationController
 
       render({ :template => "photos/index.html.erb" })
   end
+
+  def discovery
+    matching_photos = Photo.all
+
+    @list_of_photos = matching_photos.order({ :created_at => :desc })
+
+    
+    render({ :template => "photos/index.html.erb" })
+  end
   
   def profile 
     
@@ -142,5 +151,8 @@ def show
 
   
 end
+
+
+
 
 end

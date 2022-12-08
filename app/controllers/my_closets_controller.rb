@@ -65,7 +65,8 @@ class MyClosetsController < ApplicationController
     mootsie = moots.sender_id
     muts = User.where(:id=>mootsie).first
     @moots_nr = muts.fetch(:mobile)
-
+    poster = User.where(:id=>the_my_closet.user_id).first
+    postername = poster.username
     if the_my_closet.valid?
       the_my_closet.save
 
@@ -75,7 +76,7 @@ class MyClosetsController < ApplicationController
       auth_token = ENV['TWILIO_AUTH_TOKEN']
       @twilio_sending_number = "+13854584096"
       @to_number = @moots_nr
-
+      @t_body = "someone just posted their ootd"
       # Create an instance of the Twilio Client and authenticate with your API key
       twilio_client = Twilio::REST::Client.new(account_sid, auth_token)
 
@@ -83,7 +84,7 @@ class MyClosetsController < ApplicationController
       sms_info = {
         :from => @twilio_sending_number,
         :to => @to_number,
-        :body => "someone you follow just posted an ootd" 
+        :body => @t_body
       }
 
       # Send your SMS!
