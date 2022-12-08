@@ -29,7 +29,7 @@ class MootsRequestsController < ApplicationController
       if recip_private == nil 
           the_moots_request.status = 1 
           the_moots_request.save
-          redirect_to("/my_closets", { :notice => "followed" })
+          redirect_to("/blackbook", { :notice => "followed" })
       else 
         the_moots_request.save
         redirect_to("/blackbook", { :notice => "Moots request created successfully." })
