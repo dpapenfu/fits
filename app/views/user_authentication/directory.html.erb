@@ -1,4 +1,4 @@
-<h2>the black book</h2>
+<h2>directory</h2>
 
 <hr>
 <div>
@@ -23,7 +23,7 @@
           <%= the_thing.username %>
         </td>
         <td>
-          <img src= "<%= the_thing.user_profile_pic%>" class="img-responsive">
+          <img src= "<%= the_thing.user_profile_pic%>" class="pfp">
         </td>
         <% if session.fetch(:user_id) == the_thing.id %>
         <td>

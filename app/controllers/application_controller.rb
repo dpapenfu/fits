@@ -17,9 +17,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def search_bar
-  @search = User.ransack(params[:search])
-  @results = @search.result
-  end
 
 end

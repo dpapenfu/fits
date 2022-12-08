@@ -114,7 +114,9 @@ class UserAuthenticationController < ApplicationController
    render({ :template => "user_authentication/search.html.erb"})
   end
   def directory
-    @user_list = User.all
+   @user_list = User.all
+    # @q = User.ransack(params[:q])
+    # @results = @q.result
     render({ :template => "user_authentication/directory.html.erb"})
   end 
 end
