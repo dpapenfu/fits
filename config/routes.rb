@@ -2,20 +2,25 @@ Rails.application.routes.draw do
 
   # Routes for the Fit check resource:
 
+    #Welcome page 
+
+  # get("/", { :controller => "user_authentication", :action=> "welcome_page"})
+  get"/"=> "user_authentication#welcome_page"
+
   # CREATE
-  post("/insert_fit_check", { :controller => "fit_checks", :action => "create" })
+  post"/insert_fit_check" =>"fit_checks#create"
           
   # READ
-  get("/fit_checks", { :controller => "fit_checks", :action => "index" })
+  get"/fit_checks" => "fit_checks#index"
   
-  get("/fit_checks/:path_id", { :controller => "fit_checks", :action => "show" })
+  get"/fit_checks/:path_id" =>"fit_checks#show"
   
   # UPDATE
   
-  post("/modify_fit_check/:path_id", { :controller => "fit_checks", :action => "update" })
+  post"/modify_fit_check/:path_id" =>"fit_checks#update"
   
   # DELETE
-  get("/delete_fit_check", { :controller => "fit_checks", :action => "destroy" })
+  get"/delete_fit_check" =>"fit_checks#destroy"
 
   #------------------------------
 
@@ -44,9 +49,7 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  #Welcome page 
 
-  get("/", { :controller => "user_authentication", :action=> "welcome_page"})
 
   # Routes for the Comment resource:
 
